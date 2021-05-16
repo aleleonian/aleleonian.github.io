@@ -17,7 +17,7 @@
 
         hr {
             border-top: 1px dotted white;
-            width:50%;
+            width: 50%;
         }
 
         a {
@@ -91,13 +91,34 @@
                     </li>
                     <hr>
                     <li>
-                        3) Create a method isDebuggerPresent() that returns true when the user has devtools open, otherwise false. In other words, it should detect if the user is actually debugging or analyzing the webpage. Make sure it works on the latest versions of Firefox, Chrome and Microsoft Edge.
+                        3) Create a method isDebuggerPresent() that returns true when the user has devtools open,
+                        otherwise false. In other words, it should detect if the user is actually debugging or analyzing
+                        the webpage. Make sure it works on the latest versions of Firefox, Chrome and Microsoft Edge.
                     </li>
                     <li>
-                        3) I present two solutions to this challenge. Solution <a href="isdebuggerpresent/1/index.html">number 1</a> and <a href="https://milklike-salutes.000webhostapp.com">number two</a>. I find the last one to be more sophisticated. Solution number two is hosted elsewhere due to the need for php.
+                        3) I present two solutions to this challenge. Solution <a
+                            href="isdebuggerpresent/1/index.html">number 1</a> and <a
+                            href="https://milklike-salutes.000webhostapp.com">number two</a>. I find the last one to be
+                        more sophisticated. Solution number two is hosted elsewhere due to the need for php. In both
+                        cases i chose to display an alert in response to the detection of devtools but that behaviour is
+                        of course optional.
                     </li>
-                </ul>
-                </p>
+
+                    <hr>
+
+                    <li>
+                        4) <B>Microsoft Edge (not Edgium but EdgeHTML) or Internet Explorer :</B> build a script that
+                        closes the window (or tab) without requesting confirmation from the user. It has to be a window
+                        (or tab) that was manually opened by the user, not using script.
+                    </li>
+
+                    <li>
+                        Solution is <a href="./closewindow/index.html">here</a>. I tested the solution using Internet explorer version 11.0.0.4. with navigator.userAgent 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Tablet PC 2.0; Zoom 3.6.0; rv:11.0) like Gecko'
+
+                        It works like a charm provided you allow execution of ActiveX when the browser demands it.
+                    </li>
+
+                    </p>
             </div>
         </div>
 

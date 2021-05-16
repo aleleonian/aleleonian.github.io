@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrá la ventana que hace frío!</title>
+
+    <style>
+        .flexcentered {
+          margin-top: 50px;
+          display: flex;
+          justify-content: center;
+        }
+      </style>
+
+</head>
+
+<body>
+
+    <script>
+
+        function closeIt() {
+
+            window.open('', '_self', '');
+            window.close();
+
+        }
+
+    </script>
+
+
+<div class="flexcentered">
+    <button onClick="closeIt()">Close the frigging window</button>
+  </div>
+
+
+</body>
+
+</html>

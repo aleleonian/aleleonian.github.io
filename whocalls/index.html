@@ -40,6 +40,7 @@ Where was that function called from?
 	// ** Case 2 Iframe version 2 **
 
 	document.write('<iframe>');
+	window[0].document.write('JS generated iframe')
 	window[0].document.write('<script>window.onload = function(){parent.simpleAlert(\'inline iframe - case 2 - line 44\');}<\/script>');
 	window[0].document.close();
 	document.write('</iframe>');

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kick headless in the arse</title>
+</head>
+
+<body>
+
+    <script>
+        function pdfTest() {
+
+            return new Promise((resolve, reject) => {
+
+                const obj = document.createElement("object");
+                obj.data = "https://aleleonian.github.io/YouShallNotPass.pdf";
+                obj.onload = function () { resolve(true) }
+                obj.onerror = function () { resolve(false) }
+                document.body.appendChild(obj);
+            })
+
+        }
+
+        async function fuckHeadlessInTheArse() {
+            let testResult = await pdfTest();
+            document.write("You are not headless");
+        }
+
+        fuckHeadlessInTheArse();
+    </script>
+
+</body>
+
+</html>

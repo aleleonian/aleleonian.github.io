@@ -113,16 +113,33 @@
                     </li>
 
                     <li>
-                        Solution is <a href="./closewindow/index.html">here</a>. I tested the solution using Internet explorer version 11.0.0.4. with navigator.userAgent 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Touch; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Tablet PC 2.0; Zoom 3.6.0; rv:11.0) like Gecko'.
+                        Solution is <a href="./closewindow/index.html">here</a>. I tested the solution using Internet
+                        explorer version 11.0.0.4. with navigator.userAgent 'Mozilla/5.0 (Windows NT 10.0; WOW64;
+                        Trident/7.0; Touch; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR
+                        3.5.30729; Tablet PC 2.0; Zoom 3.6.0; rv:11.0) like Gecko'.
 
                         It works like a charm provided you allow execution of ActiveX when the browser demands it.
                     </li>
                     <HR>
                     <li>
-                        5) Create a simple script for Firefox/Chrome that detects when a click happened and reports if it's a real or an artificial one.
+                        5) Create a simple script for Firefox/Chrome that detects when a click happened and reports if
+                        it's a real or an artificial one.
                     </li>
                     <li>
-                        Solution to this challenge can be found <a href="click/index.html">here</a>. This is a page with a script that will be able to discriminate between a click performed by a JS script, a click performed by a human and a click performed by a bot. Here's a <a href="click/click.zip">Selenium script</a> perform an automation test.
+                        Solution to this challenge can be found <a href="click/index.html">here</a>. This is a page with
+                        a script that will be able to discriminate between a click performed by a JS script, a click
+                        performed by a human and a click performed by a bot. Here's a <a href="click/click.zip">Selenium
+                            script</a> to test the script by opening the page and clicking a button.
+                    </li>
+
+                    <HR>
+
+                    <li>
+                        6)Build a Selenium script that loads a webpage, and from within that webpage, without using any navigator or clientInformation property determine if it has been loaded via Selenium. In other words, detect if the webpage has been loaded with automation.
+                    </li>
+                    <li>
+                        Final solution is <a href="knock-headless/index.html">here</a>. This page contains a script that discriminates headless browsing without using the navigator object or similar approach. The script exploits a flaw that will put headless browsers in a limbo or make them timeout. Bare in mind it only works with headless browsing. Regular browsing will survive . 
+                        Here's two <a href="knock-headless/knock-headless.zip">Selenium and Puppeteer</a> scripts as proof of concept.
                     </li>
                     </p>
             </div>

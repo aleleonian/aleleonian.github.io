@@ -7,81 +7,90 @@
 			display: flex;
 			justify-content: center;
 		}
+
+		button {
+			margin: 20px;
+		}
+		
 	</style>
 </head>
-Where was that function called from?
 
-<br /><br />
-<script>
+<body>
 
-	function simpleAlert(whereFrom) {
 
-		let functionExecutedFromSameWindow = true;
-		let caller;
+	<div class="flexcentered">
+		Where was that function called from?
+	</div>
 
-		if (simpleAlert.arguments.callee.caller) {
-			caller = simpleAlert.arguments.callee.caller.toLocaleString();
+	<br /><br />
+	<script>
 
-			if (caller.indexOf("parent") != -1) {
-				functionExecutedFromSameWindow = false;
+		function openWin() {
+
+			var myWindow = window.open("newwindow.html", "myWindow", "width=200, height=100");
+		}
+
+		function simpleAlert(whereFrom) {
+
+			let functionExecutedFromSameWindow = true;
+			let caller;
+
+			if (simpleAlert.arguments.callee.caller) {
+				caller = simpleAlert.arguments.callee.caller.toLocaleString();
+
+				if (caller.indexOf("parent") != -1) {
+					functionExecutedFromSameWindow = false;
+
+				}
+				else if (caller.indexOf("opener") != -1) {
+					functionExecutedFromSameWindow = false;
+				}
 
 			}
-			else if (caller.indexOf("opener") != -1) {
-				functionExecutedFromSameWindow = false;
-			}
 
+
+			if (functionExecutedFromSameWindow) alert(`Function was executed from within the same window/viewport (${whereFrom})`);
+			else if (functionExecutedFromSameWindow == false) alert(`Function was executed from a different window/viewport (${whereFrom})`);
 		}
 
 
-		if (functionExecutedFromSameWindow) alert(`Function was executed from within the same window/viewport (${whereFrom})`);
-		else if (functionExecutedFromSameWindow == false) alert(`Function was executed from a different window/viewport (${whereFrom})`);
-	}
+		// ** Case 1 same page onload **
+
+		window.onload = () => { simpleAlert("window.onload") };
 
 
-	// Uncomment as you wish.
-	//-----------------------
 
-	// ** Case 1 same page onload **
+		function generateIframeAndCallTheFunction() {
+			document.write('<iframe>');
+			window[0].document.write('<html><body>')
+			window[0].document.write('JS generated iframe')
+			window[0].document.write('<script>window.onload = function(){parent.simpleAlert(\'inline iframe\');}<\/script>');
+			window[0].document.write('<BR><a href="javascript:window.top.location=\'index.html\'">Go back</a>');
+			window[0].document.write('</body></html>')
+			window[0].document.close();
+			document.write('</iframe>');
+		}
 
-	window.onload = () => { simpleAlert("window.onload - case 1 - line 38") };
-
-
-	// ** Case 2 Iframe version 2 **
-
-	document.write('<iframe>');
-	window[0].document.write('JS generated iframe')
-	window[0].document.write('<script>window.onload = function(){parent.simpleAlert(\'inline iframe - case 2 - line 44\');}<\/script>');
-	window[0].document.close();
-	document.write('</iframe>');
+	</script>
 
 
-	// ** Case 3 same page function call **
-
-	simpleAlert("same page - case 3 - line 55");
 
 
-</script>
+
+	<BR>
+	<BR>
 
 
-<!-- ** Case 4 Iframe version 1 ** -->
+		<div class="flexcentered">
+		<button onclick="simpleAlert('same page')">Just call simpleAlert()</button>
+		<button onclick="generateIframeAndCallTheFunction()">Generate an iframe and call simpleAlert() from the
+			iframe</button>
+		<button onclick="openWin()">Open new window and call simpleAlert()</button>
+	</div>
 
-<iframe src="iframe.html" frameborder="0"></iframe>
-
-<script>
-	// ** Case 5 Open a new window **
-	function openWin() {
-
-		var myWindow = window.open("newwindow.html", "myWindow", "width=200, height=100");
-	}
-</script>
-
-<button onclick="openWin()">Open new window</button>
-
-<BR>
-<BR>
-
-<div class="flexcentered">
-	<a href="javascript:history.go(-1)">Go back</a>
-</div>
+	<div class="flexcentered">
+		<a href="javascript:history.go(-1)">Go back</a>
+	</div>
+</body>
 
 </html>

@@ -1,0 +1,70 @@
+<html>
+
+Where was that function called from?
+
+<br /><br />
+<script>
+
+	function simpleAlert(whereFrom) {
+
+		let functionExecutedFromSameWindow = true;
+		let caller;
+
+		if (simpleAlert.arguments.callee.caller) {
+			caller = simpleAlert.arguments.callee.caller.toLocaleString();
+
+			if (caller.indexOf("parent") != -1) {
+				functionExecutedFromSameWindow = false;
+
+			}
+			else if (caller.indexOf("opener") != -1) {
+				functionExecutedFromSameWindow = false;
+			}
+
+		}
+
+
+		if (functionExecutedFromSameWindow) alert(`Function was executed from within the same window/viewport (${whereFrom})`);
+		else if (functionExecutedFromSameWindow == false) alert(`Function was executed from a different window/viewport (${whereFrom})`);
+	}
+
+
+	// Uncomment as you wish.
+	//-----------------------
+
+	// ** Case 1 same page onload **
+
+	window.onload = () => { simpleAlert("window.onload - case 1 - line 38") };
+
+
+	// ** Case 2 Iframe version 2 **
+
+	document.write('<iframe>');
+	window[0].document.write('<script>window.onload = function(){parent.simpleAlert(\'inline iframe - case 2 - line 44\');}<\/script>');
+	window[0].document.close();
+	document.write('</iframe>');
+
+
+	// ** Case 3 same page function call **
+
+	simpleAlert("same page - case 3 - line 55");
+
+
+</script>
+
+
+<!-- ** Case 4 Iframe version 1 ** -->
+
+<iframe src="iframe.html" frameborder="0"></iframe>
+
+<script>
+	// ** Case 5 Open a new window **
+	function openWin() {
+
+		var myWindow = window.open("newwindow.html", "myWindow", "width=200, height=100");
+	}
+</script>
+
+<button onclick="openWin()">Open new window</button>
+
+</html>

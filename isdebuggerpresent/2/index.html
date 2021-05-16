@@ -1,0 +1,59 @@
+<html>
+<head>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <script>
+
+
+        // From https://weizman.github.io/website/?javascript-anti-debugging-some-next-level-shit-part-1
+        function smap(url) {
+            const script = document.createElement('script');
+            script.textContent = `//# sourceMappingURL=${url}`;
+            document.head.appendChild(script);
+            script.remove();
+        }
+        // let url = location.href;
+
+        // if(url.indexOf('index.html') != -1) {
+        //     url = url.split("/");
+        //     url.pop();
+        //     url = url.join("/");
+
+        // }
+
+        let url = 'http://' + location.host + "/whiteops/isdebuggerpresent/2/sm.php";
+
+        smap(url);
+
+    </script>
+    <script>
+
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
+        function getCookieValue(a) {
+            var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+            return b ? b.pop() : '';
+        }
+
+        eraseCookie("DevTools");
+
+        let myInterval;
+
+        myInterval = setInterval(() => {
+            if (getCookieValue("DevTools") == "True") {
+                alert("I see what you're doing! GET OUT");
+                clearInterval(myInterval);
+                location.href = "http://www.google.com.ar"
+            }
+        }, 100);
+    </script>
+</head>
+
+<body>
+    <h1>I dare you open the console / debugger, you little bitch.</h1>
+</body>
+
+</html>

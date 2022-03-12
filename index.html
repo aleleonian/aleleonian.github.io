@@ -1,170 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+	<head>
+		<title>earth and moon</title>
+		<meta charset="utf-8">
+		<meta name="generator" content="Three.js Editor">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: sans-serif;
+				font-size: 11px;
+				background-color: #000;
+				margin: 0px;
+			}
+			canvas {
+				display: block;
+			}
+		</style>
+	</head>
+	<body ontouchstart="">
+		<script type="module">
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+			import * as THREE from './js/three.module.js';
+			import { APP } from './js/app.js';
+			import { VRButton } from './js/VRButton.js';
 
-    <style>
-        html,
-        body {
-            height: 100%;
-            font-family: "Source Code Pro", monospace;
-            color: #919191;
-            background: #272727;
+			window.THREE = THREE; // Used by APP Scripts.
+			window.VRButton = VRButton; // Used by APP Scripts.
 
-        }
+			var loader = new THREE.FileLoader();
+			loader.load( 'app.json', function ( text ) {
 
-        hr {
-            border-top: 1px dotted white;
-            width: 50%;
-        }
+				var player = new APP.Player();
+				player.load( JSON.parse( text ) );
+				player.setSize( window.innerWidth, window.innerHeight );
+				player.play();
 
-        a {
-            color: #F0DB4F;
-        }
+				document.body.appendChild( player.dom );
 
-        a:hover {
-            color: #F0DB4F;
-            text-decoration: none;
-        }
+				window.addEventListener( 'resize', function () {
 
-        h1 {
-            color: white;
-        }
+					player.setSize( window.innerWidth, window.innerHeight );
 
-        .solution {
-            color: #F0DB4F;
-        }
+				} );
 
-        .content {
-            padding-top: 50px;
-            width: 100%;
-            height: 100%;
-        }
-
-        .flex-centered {
-            display: flex;
-            justify-content: center;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="content">
-
-        <div class="row">
-            <div class="col-lg-12 flex-centered">
-                <h1>Human Security Javascript Challenges</h1>
-            </div>
-        </div>
-
-        <div class="row flex-centered">
-            <div class="col-lg-8">
-                <p>
-                <ul>
-                    <li>1) Create a webpage with a JavaScript method that can be called from any viewport/window. Detect
-                        if it
-                        has
-                        been called from its own window or a different one.
-                        You can just modify this sample code: https://goo.gl/gHTQMF
-                        Verify that it works on the latest versions of Chrome, Firefox and Edge
-                    </li>
-                    <li>
-                        Solution is <a href="whocalls/index.html">here</a>. 4 cases have been contemplated in this
-                        script.
-
-                        1 will execute automatically just by loading the page. To activate the other 3, you have to click a
-                        button. Case number 4's detection happens when you either close or click outside the newly
-                        opened window. 
-
-                    </li>
-                    <hr>
-                    <li>
-                        2) Please, find out the correct password: <a
-                            href="https://drive.google.com/open?id=1Mqimu9v25apD5uN34QKp1oFJ2c7R1JPZ">https://drive.google.com/open?id=1Mqimu9v25apD5uN34QKp1oFJ2c7R1JPZ</a>
-                    </li>
-                    <li>
-                        Solution: password is <span class="solution">trustno1</span>.
-                        <i>",68,11b,8b20,435c65a,f8ba9798ff2225c361,".replace(/2/g,'7').replace(/,/g,'e')</i> equals to
-                        e68e11be8b70e435c65aef8ba9798ff7775c361e which is a well known sha1 reverse hash of 'trustno1'.
-                    </li>
-                    <hr>
-                    <li>
-                        3) Create a method isDebuggerPresent() that returns true when the user has devtools open,
-                        otherwise false. In other words, it should detect if the user is actually debugging or analyzing
-                        the webpage. Make sure it works on the latest versions of Firefox, Chrome and Microsoft Edge.
-                    </li>
-                    <li>
-                        3) I present two solutions to this challenge. Solution <a
-                            href="isdebuggerpresent/1/index.html">number 1</a> and <a
-                            href="https://milklike-salutes.000webhostapp.com">number two</a>. I find the last one to be
-                        more sophisticated. Solution number two is hosted elsewhere due to the need for php. In both
-                        cases i chose to display an alert in response to the detection of devtools but that behaviour is
-                        of course optional.
-                    </li>
-
-                    <hr>
-
-                    <li>
-                        4) <B>Microsoft Edge (not Edgium but EdgeHTML) or Internet Explorer :</B> build a script that
-                        closes the window (or tab) without requesting confirmation from the user. It has to be a window
-                        (or tab) that was manually opened by the user, not using script.
-                    </li>
-
-                    <li>
-                        Solution is <a href="./closewindow/index.html">here</a>. I tested the solution using Internet
-                        explorer version 11.0.0.4. with navigator.userAgent 'Mozilla/5.0 (Windows NT 10.0; WOW64;
-                        Trident/7.0; Touch; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR
-                        3.5.30729; Tablet PC 2.0; Zoom 3.6.0; rv:11.0) like Gecko'.
-
-                        It works like a charm provided you allow execution of ActiveX if/when the browser demands it.
-                    </li>
-                    <HR>
-                    <li>
-                        5) Create a simple script for Firefox/Chrome that detects when a click happened and reports if
-                        it's a real or an artificial one.
-                    </li>
-                    <li>
-                        Solution to this challenge can be found <a href="click/index.html">here</a>. This is a page with
-                        a script that will be able to discriminate between a click performed by a JS script, a click
-                        performed by a human and a click performed by a bot. Here's a <a href="click/click.zip">Selenium
-                            script</a> to test the solution by opening the page and clicking a button.
-                    </li>
-
-                    <HR>
-
-                    <li>
-                        6)Build a Selenium script that loads a webpage, and from within that webpage, without using any
-                        navigator or clientInformation property determine if it has been loaded via Selenium. In other
-                        words, detect if the webpage has been loaded with automation.
-                    </li>
-                    <li>
-                        Final solution is <a href="knock-headless/index.html">here</a>. This page contains a script that
-                        discriminates headless browsing without using the navigator object or similar approach. The
-                        script exploits a flaw that will put headless browsers in a limbo or make them timeout. Bear in
-                        mind it only works with headless browsing. Regular browsing will survive .
-                        Here's two <a href="knock-headless/knock-headless.zip">Selenium and Puppeteer</a> scripts as
-                        proof of concept.
-                    </li>
-                    </p>
-
-                    <BR>
-                    <BR>
-                    Thank you very much.
-                    <BR>
-                    <BR>
-
-                    Alejandro Leonian
-
-            </div>
-        </div>
-
-    </div>
+			} );
 
 
 
-</body>
-
+		</script>
+	</body>
 </html>
